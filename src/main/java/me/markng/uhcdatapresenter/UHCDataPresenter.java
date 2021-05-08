@@ -33,7 +33,7 @@ public class UHCDataPresenter implements ModInitializer {
                         .map(PlayerInfo::new)
                         .map(Object::toString)
                         .collect(Collectors.joining(","))+"]";
-                SendToBrowser.sendMessage(playerString);
+                SendToBrowser.sendMessage("{\"players\":"+playerString+"}");
             }
         },0,1000); //This is just for testing.
     }

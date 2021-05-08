@@ -1,10 +1,14 @@
-<div id="response">output:</div>
+header:<div id="header"></div>
+footer:<div id="footer"></div>
+PLAYERS:<div id="players"></div>
 <script>
 	const ws=new WebSocket('ws://localhost:8080');
 	ws.onmessage=message=>{
 		message=JSON.parse(message.data);
-		document.querySelector('#response').innerHTML=message.map(player=>{
+		if(message.players) document.querySelector('#players').innerHTML=message.players.map(player=>{
 			return `<div>[${player.team}]${player.name}: ${player.health}</div>`
 		}).join('')
+		if(message.header) document.querySelector('#header').innerText=message.header;
+		if(message.footer) document.querySelector('#footer').innerText=message.footer;
 	}
 </script>
