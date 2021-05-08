@@ -23,7 +23,7 @@ public class UHCDataPresenter implements ModInitializer {
         new Timer().scheduleAtFixedRate(new TimerTask(){
             @Override
             public void run(){
-                SendToBrowser.sendMessage("test");
+                SendToBrowser.sendMessage("a message with, lots' \" of weird charactERS! this might *crash* \\something. lets? = asodifjoaisdf");
             }
         },0,5000); //This is just for testing.
     }

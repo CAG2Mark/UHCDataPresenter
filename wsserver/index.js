@@ -1,7 +1,8 @@
 const http=require('http');
 const WebSocket = require('ws');
 const server=http.createServer((req,res)=>{
-	connections.forEach(connection=>connection.send(req.url));
+	const message=decodeURIComponent(req.url.split('=')[1]);
+	connections.forEach(connection=>connection.send(message));
 	res.end('ok');
 })
 const wss = new WebSocket.Server({ server });
