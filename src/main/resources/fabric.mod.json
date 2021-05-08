@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "bdfc2c7d644043488ffa95f930b3668f",
+  "version": "${version}",
+  "name": "UHCDataPresenter",
+  "description": "Takes data from the CubeKrowd UHC server and puts it on a localhost server",
+  "authors": [
+    "CAG2Mark"
+  ],
+  "contributors": [],
+  "contact": {
+    "sources": "https://github.com/CAG2Mark/UHCDataPresenter"
+  },
+  "license": "MIT",
+  "icon": "assets/uhc-data-presenter/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.markng.uhcdatapresenter.UHCDataPresenter"
+    ],
+    "client": [],
+    "server": []
+  },
+  "mixins": [
+    "uhc-data-presenter.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*"
+  }
+}
