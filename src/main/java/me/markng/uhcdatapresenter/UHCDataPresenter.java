@@ -29,10 +29,10 @@ public class UHCDataPresenter implements ModInitializer {
                 if(MinecraftClient.getInstance().player==null) return;
                 ClientPlayerEntity thisPlayer=MinecraftClient.getInstance().player;
                 if(thisPlayer==null) return;
-                String playerString=thisPlayer.networkHandler.getPlayerList().stream()
+                String playerString="["+thisPlayer.networkHandler.getPlayerList().stream()
                         .map(PlayerInfo::new)
                         .map(Object::toString)
-                        .collect(Collectors.joining(","));
+                        .collect(Collectors.joining(","))+"]";
                 SendToBrowser.sendMessage(playerString);
             }
         },0,1000); //This is just for testing.

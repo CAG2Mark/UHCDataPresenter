@@ -21,10 +21,6 @@ public class PlayerInfo {
 
 	@Override
 	public String toString() {
-		return "PlayerInfo{" +
-				"name='" + name + '\'' +
-				", team='" + team + '\'' +
-				", health=" + health +
-				'}';
+		return "{\"name\":\"" + name + "\", \"team\":\"" + team +"\", \"health\":\"" + health + "\"}";
 	}
 }

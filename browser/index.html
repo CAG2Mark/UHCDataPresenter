@@ -1,5 +1,10 @@
 <div id="response">output:</div>
 <script>
 	const ws=new WebSocket('ws://localhost:8080');
-	ws.onmessage=message=>document.querySelector('#response').innerHTML+="<br>"+message.data;
+	ws.onmessage=message=>{
+		message=JSON.parse(message.data);
+		document.querySelector('#response').innerHTML=message.map(player=>{
+			return `<div>[${player.team}]${player.name}: ${player.health}</div>`
+		}).join('')
+	}
 </script>
