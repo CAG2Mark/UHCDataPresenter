@@ -30,6 +30,7 @@ public class UHCDataPresenter implements ModInitializer {
                 ClientPlayerEntity thisPlayer=MinecraftClient.getInstance().player;
                 if(thisPlayer==null) return;
                 String playerString="["+thisPlayer.networkHandler.getPlayerList().stream()
+                        .filter(player->player.getDisplayName()==null)//remove BTLP2ebb60ef
                         .map(PlayerInfo::new)
                         .map(Object::toString)
                         .collect(Collectors.joining(","))+"]";
