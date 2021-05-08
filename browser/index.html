@@ -1,0 +1,5 @@
+<div id="response">output:</div>
+<script>
+	const ws=new WebSocket('ws://localhost:8080');
+	ws.onmessage=message=>document.querySelector('#response').innerHTML+="<br>"+message.data;
+</script>
