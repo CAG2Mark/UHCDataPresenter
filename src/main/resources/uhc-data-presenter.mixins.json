@@ -2,7 +2,10 @@
   "required": true,
   "package": "me.markng.uhcdatapresenter.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "mixins": [
+    "HeaderFooter",
+    "ReceiveMessageMixin"
+  ],
   "client": [],
   "server": [],
   "injectors": {

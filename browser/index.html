@@ -1,0 +1,18 @@
+header:<div id="header"></div>
+footer:<div id="footer"></div>
+PLAYERS:<div id="players"></div>
+log:<div id="log"></div>
+deathlog:<div id="death"></div>
+<script>
+	const ws=new WebSocket('ws://localhost:8080');
+	ws.onmessage=message=>{
+		message=JSON.parse(message.data);
+		if(message.players) document.querySelector('#players').innerHTML=message.players.map(player=>{
+			return `<div>[${player.team}]${player.name}: ${player.health}</div>`
+		}).join('')
+		if(message.header) document.querySelector('#header').innerText=message.header;
+		if(message.footer) document.querySelector('#footer').innerText=message.footer;
+		if(message.log) document.querySelector('#log').innerHTML+="<br>"+decodeURIComponent(message.log);
+		if(message.death) document.querySelector('#death').innerHTML+="<br>"+JSON.stringify(message.death);
+	}
+</script>
