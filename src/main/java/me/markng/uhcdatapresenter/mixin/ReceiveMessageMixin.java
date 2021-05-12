@@ -1,6 +1,7 @@
 package me.markng.uhcdatapresenter.mixin;
 
-import me.markng.uhcdatapresenter.SendToBrowser;
+import me.markng.uhcdatapresenter.DataAPI;
+import me.markng.uhcdatapresenter.UHCDataPresenter;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.BaseText;
@@ -27,7 +28,11 @@ public class ReceiveMessageMixin {
 				if (textPart instanceof TranslatableText) attacker = I18n.translate(((TranslatableText) textPart).getKey());
 				if (textPart instanceof LiteralText) attacker = ((LiteralText) textPart).getString();
 			} else attacker=translatableText.getKey();
-			SendToBrowser.sendMessage("{\"death\":{\"attacker\":\""+attacker+"\",\"name\":\""+killed+"\",\"key\":\""+translatableText.getKey()+"\",\"message\":\""+translatableText.getString()+"\"}}");
+
+			String death = "{\"attacker\":\""+attacker+"\",\"name\":\""+killed+"\",\"key\":\""+translatableText.getKey()+"\",\"message\":\""+translatableText.getString()+
+					"\",\"time\":" + (System.currentTimeMillis() / 1000L) + "}";
+			UHCDataPresenter.api.addDeath(death);
+			System.out.println("Added death: " + death);
 		}
 	}
 }
