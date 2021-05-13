@@ -19,6 +19,11 @@ public class Death {
 			if (textPart instanceof TranslatableText) attacker = I18n.translate(((TranslatableText) textPart).getKey());
 			if (textPart instanceof LiteralText) attacker = ((LiteralText) textPart).getString();
 		} else attacker=translatableText.getKey();
+		if (killed.isEmpty()) {
+			Object textPart = translatableText.getArgs()[0];
+			if (textPart instanceof TranslatableText) killed = I18n.translate(((TranslatableText) textPart).getKey());
+			if (textPart instanceof LiteralText) killed = ((LiteralText) textPart).getString();
+		}
 		this.attacker=attacker;
 		this.name=killed;
 		this.key=translatableText.getKey();
