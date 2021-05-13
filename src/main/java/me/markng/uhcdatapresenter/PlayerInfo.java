@@ -24,9 +24,4 @@ public class PlayerInfo {
 		Scoreboard scoreboard= MinecraftClient.getInstance().world.getScoreboard();
 		health=scoreboard.getPlayerScore(name,scoreboard.getObjectiveForSlot(0)).getScore();
 	}
-
-	@Override
-	public String toString() {
-		return "{\"name\":\"" + name + "\", \"team\":\"" + teamColor +"\", \"health\":\"" + health + "\"}";
-	}
 }

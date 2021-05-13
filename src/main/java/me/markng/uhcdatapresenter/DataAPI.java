@@ -1,8 +1,10 @@
 package me.markng.uhcdatapresenter;
 
+import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import net.minecraft.text.TranslatableText;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,6 +17,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -23,45 +26,19 @@ public class DataAPI {
 	private HttpServer server;
 
 	private boolean isInitialized;
-
-	private String playersMsg = "\"players\":[]";
-	private String deathsMsg = "\"deaths\":[]";
-
-	public void setCurPlayer(String curPlayer) {
-		this.curPlayer = "\"currentPlayer\":"+curPlayer;
-	}
-
-	private String curPlayer = "\"currentPlayer\":{}";
-	private final ArrayList<String> deathsMsgs = new ArrayList<String>();
-
-	public void addDeath(String death) {
-		deathsMsgs.add(death);
-		updateDeathsString();
+	Response response=new Response();
+	public void addDeath(Death death) {
+		response.deaths.add(death);
 	}
 
 	public void reset() {
-		deathsMsgs.clear();
-		updateDeathsString();
-	}
-
-	private void updateDeathsString() {
-		StringBuilder b = new StringBuilder();
-		b.append("\"deaths\":[");
-		b.append(String.join(",", deathsMsgs));
-		b.append("]");
-
-		deathsMsg = b.toString();
-	}
-
-	public void setPlayers(String players) {
-		if (StringUtils.isEmpty(players)) return;
-
-		this.playersMsg = players;
+		response.deaths.clear();
 	}
 
 	public DataAPI() {
 
 	}
+
 
 	public void initialize() throws IOException {
 		if (isInitialized) return;
@@ -90,8 +67,8 @@ public class DataAPI {
 
 
 			OutputStream outputStream = exchange.getResponseBody();
-
-			String res = "{" + curPlayer + "," + playersMsg + "," + deathsMsg + "}";
+			Gson gson = new Gson();
+			String res=gson.toJson(response);
 
 			exchange.sendResponseHeaders(200, res.length());
 
@@ -106,8 +83,6 @@ public class DataAPI {
 		System.out.println("Server started on port 8081");
 
 		isInitialized = true;
-
-		updateDeathsString();
 	}
 
 
