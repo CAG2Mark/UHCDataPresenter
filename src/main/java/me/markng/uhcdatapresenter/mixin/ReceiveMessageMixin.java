@@ -21,14 +21,7 @@ public class ReceiveMessageMixin {
 		if(text instanceof TranslatableText) {
 			TranslatableText translatableText=(TranslatableText) text;
 			if(!translatableText.getKey().contains("death")) return;
-			String killed=((BaseText) translatableText.getArgs()[0]).asString();
-			String attacker = "";
-			if(translatableText.getArgs().length>1) {
-				Object textPart = translatableText.getArgs()[1];
-				if (textPart instanceof TranslatableText) attacker = I18n.translate(((TranslatableText) textPart).getKey());
-				if (textPart instanceof LiteralText) attacker = ((LiteralText) textPart).getString();
-			} else attacker=translatableText.getKey();
-			Death death=new Death(attacker,killed,translatableText);
+			Death death=new Death(translatableText);
 			UHCDataPresenter.api.addDeath(death);
 			System.out.println("Added death: "+death);
 		}
