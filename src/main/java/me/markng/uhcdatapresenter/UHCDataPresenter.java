@@ -1,7 +1,4 @@
 package me.markng.uhcdatapresenter;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
