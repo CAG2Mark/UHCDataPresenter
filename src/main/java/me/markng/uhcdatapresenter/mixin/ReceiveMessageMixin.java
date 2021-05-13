@@ -28,11 +28,9 @@ public class ReceiveMessageMixin {
 				if (textPart instanceof TranslatableText) attacker = I18n.translate(((TranslatableText) textPart).getKey());
 				if (textPart instanceof LiteralText) attacker = ((LiteralText) textPart).getString();
 			} else attacker=translatableText.getKey();
-
-			String death = "{\"attacker\":\""+attacker+"\",\"name\":\""+killed+"\",\"key\":\""+translatableText.getKey()+"\",\"message\":\""+translatableText.getString()+
-					"\",\"time\":" + (System.currentTimeMillis() / 1000L) + "}";
+			DataAPI.Death death=new DataAPI.Death(attacker,killed,translatableText);
 			UHCDataPresenter.api.addDeath(death);
-			System.out.println("Added death: " + death);
+			System.out.println("Added death: "+death);
 		}
 	}
 }

@@ -1,9 +1,10 @@
 package me.markng.uhcdatapresenter;
-import ca.weblite.objc.Client;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.MessageType;
@@ -73,13 +74,10 @@ public class UHCDataPresenter implements ModInitializer {
                 PlayerInfo cur = playerStream.get().filter(p -> p.name.equals(playerName)).findFirst().orElse(null);
 
                 if (cur != null) {
-                    api.setCurPlayer(cur.toString());
+                    api.response.curPlayer=cur;
                 }
 
-                String playerString="["+
-                        playerStream.get().map(Object::toString)
-                        .collect(Collectors.joining(","))+"]";
-                api.setPlayers("\"players\":"+playerString+"");
+                api.response.players=playerStream.get().collect(Collectors.toList());
             }
         },0,50); //This is just for testing.
     }
