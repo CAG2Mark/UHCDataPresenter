@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Supplier;
@@ -62,12 +63,15 @@ public class UHCDataPresenter implements ModInitializer {
             public void run(){
                 ClientPlayerEntity thisPlayer=MinecraftClient.getInstance().player;
                 if(thisPlayer==null) return;
-                playerName = thisPlayer.getDisplayName().asString();
+                playerName = thisPlayer.getName().asString();
 
                 // init stream
                 Supplier<Stream<PlayerInfo>> playerStream = () -> thisPlayer.networkHandler.getPlayerList().stream()
                         .filter(player->player.getDisplayName()==null)//remove BTLP2ebb60ef
                         .map(PlayerInfo::new);
+
+                Stream<PlayerInfo> str = playerStream.get();
+                Object[] x = str.toArray();
 
                 // intermediary step to get the info of the current player
                 PlayerInfo cur = playerStream.get().filter(p -> p.name.equals(playerName)).findFirst().orElse(null);

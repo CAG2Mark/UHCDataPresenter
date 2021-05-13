@@ -22,6 +22,13 @@ public class ReceiveMessageMixin {
 			TranslatableText translatableText=(TranslatableText) text;
 			if(!translatableText.getKey().contains("death")) return;
 			String killed=((BaseText) translatableText.getArgs()[0]).asString();
+
+			if (killed.isEmpty()) {
+				Object textPart = translatableText.getArgs()[0];
+				if (textPart instanceof TranslatableText) killed = I18n.translate(((TranslatableText) textPart).getKey());
+				if (textPart instanceof LiteralText) killed = ((LiteralText) textPart).getString();
+			}
+
 			String attacker = "";
 			if(translatableText.getArgs().length>1) {
 				Object textPart = translatableText.getArgs()[1];
