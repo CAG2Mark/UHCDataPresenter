@@ -26,7 +26,7 @@ public class DataAPI {
 	private HttpServer server;
 
 	private boolean isInitialized;
-
+	Response response=new Response();
 	public void addDeath(Death death) {
 		response.deaths.add(death);
 	}
@@ -39,26 +39,7 @@ public class DataAPI {
 
 	}
 
-	public static class Response {
-		public List<PlayerInfo> players=new ArrayList<>();
-		public PlayerInfo curPlayer;
-		public List<Death> deaths=new ArrayList<>();
-	}
-	public static Response response=new Response();
-	public static class Death {
-		public String attacker;
-		public String name;
-		public String key;
-		public String message;
-		public Long time;
-		public Death(String attacker, String killed, TranslatableText text) {
-			this.attacker=attacker;
-			this.name=killed;
-			this.key=text.getKey();
-			this.message=text.getString();
-			this.time=(System.currentTimeMillis() / 1000L);
-		}
-	}
+
 	public void initialize() throws IOException {
 		if (isInitialized) return;
 
