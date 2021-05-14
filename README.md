@@ -4,7 +4,7 @@ Pipe locally retrieved data from CK to localhost server.
 Special thanks to https://github.com/RubenNL/ (RubenNL) for doing most of the heavy lifting with Fabric to make this possible and https://github.com/DownloadPizza (DownloadPizza) for providing assistance with Fabric.
  
 # Using
-Requires Fabric loader 11.3 or above, and any version of the Fabric API.
+**IMPORTANT**: Requires Fabric loader 0.11.3 or above, and version 0.34.2 of the Fabric API or above.
  
 Simply put into your mods folder and run. The data server will be run on `localhost` on port `8081`, so please make sure that port is free. At the moment, this is not configurable.
  
