@@ -83,11 +83,18 @@ public class DataAPI {
 			Gson gson = new Gson();
 			String res=gson.toJson(response);
 
-			exchange.sendResponseHeaders(200, res.length());
+			byte[] bytes = res.getBytes();
 
-			outputStream.write(res.getBytes(StandardCharsets.UTF_8));
-			outputStream.flush();
-			outputStream.close();
+			exchange.sendResponseHeaders(200, bytes.length);
+
+			try {
+				outputStream.write(bytes);
+				outputStream.flush();
+				outputStream.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		});
 
 		server.setExecutor(threadPoolExecutor);
