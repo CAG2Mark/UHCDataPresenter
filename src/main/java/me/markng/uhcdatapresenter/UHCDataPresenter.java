@@ -52,7 +52,7 @@ public class UHCDataPresenter implements ModInitializer {
             // send message
             MinecraftClient mc = MinecraftClient.getInstance();
             if (mc.player != null)
-                mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("Forced stopped the UHC."), mc.player.getUuid());
+                mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("Force stopped the UHC."), mc.player.getUuid());
 
             api.setStarted(false);
 
