@@ -29,7 +29,6 @@ public class UHCDataPresenter implements ModInitializer {
 
     public static DataAPI api = new DataAPI();
 
-
     public static String playerName;
 
     @Override
@@ -37,12 +36,39 @@ public class UHCDataPresenter implements ModInitializer {
 
         log(Level.INFO, "Initializing");
 
+        // reset command
         ClientCommandManager.DISPATCHER.register(literal("resetpresenter").executes(context -> {
             UHCDataPresenter.api.reset();
 
             // send message
             MinecraftClient mc = MinecraftClient.getInstance();
             mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("Reset the UHC Data Presenter."), mc.player.getUuid());
+
+            return 1;
+        }));
+
+        // force send uhc stopped message
+        ClientCommandManager.DISPATCHER.register(literal("forcestopuhc").executes(context -> {
+            // send message
+            MinecraftClient mc = MinecraftClient.getInstance();
+            if (mc.player != null)
+                mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("Forced stopped the UHC."), mc.player.getUuid());
+
+            api.setStarted(false);
+
+            return 1;
+        }));
+
+        // force send uhc started message
+        ClientCommandManager.DISPATCHER.register(literal("forcestartuhc").executes(context -> {
+            UHCDataPresenter.api.reset();
+
+            // send message
+            MinecraftClient mc = MinecraftClient.getInstance();
+            if (mc.player != null)
+                mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("Force started the UHC."), mc.player.getUuid());
+
+            api.setStarted(true);
 
             return 1;
         }));
@@ -67,9 +93,6 @@ public class UHCDataPresenter implements ModInitializer {
                 Supplier<Stream<PlayerInfo>> playerStream = () -> thisPlayer.networkHandler.getPlayerList().stream()
                         .filter(player->player.getDisplayName()==null)//remove BTLP2ebb60ef
                         .map(PlayerInfo::new);
-
-                Stream<PlayerInfo> str = playerStream.get();
-                Object[] x = str.toArray();
 
                 // intermediary step to get the info of the current player
                 PlayerInfo cur = playerStream.get().filter(p -> p.name.equals(playerName)).findFirst().orElse(null);

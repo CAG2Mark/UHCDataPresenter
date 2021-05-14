@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.network.MessageType;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +36,16 @@ public class DataAPI {
 
 	public void reset() {
 		response.deaths.clear();
+	}
+
+	public void setStarted(boolean started) {
+		response.started = started;
+		if (started) {
+			MinecraftClient mc = MinecraftClient.getInstance();
+
+			if (mc.player == null) return;
+			mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("[UHCDataPresenter] Set started flag to true."), mc.player.getUuid());
+		}
 	}
 
 	public DataAPI() {

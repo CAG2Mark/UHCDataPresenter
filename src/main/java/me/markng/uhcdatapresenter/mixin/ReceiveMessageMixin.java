@@ -25,5 +25,11 @@ public class ReceiveMessageMixin {
 			UHCDataPresenter.api.addDeath(death);
 			System.out.println("Added death: "+death);
 		}
+
+		String msg = text.asString().trim();
+		// check if UHC started
+		if (msg.startsWith("All your chat messages now appear in team chat.")) {
+			UHCDataPresenter.api.setStarted(true);
+		}
 	}
 }
