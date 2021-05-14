@@ -16,9 +16,9 @@ You can make your own overlay by looking at the data in `http://localhost:8081/d
 
 # Commands
 The mod has 3 built in commands:
-`/resetpresenter`: Resets certain data in the presenter. As of now, only the deaths are reset.
-`/forcestartuhc`: Forces the flag `started` in the data.json file to `true`, which the pre-made overlay will detect and start showing the overlay.
-`/forcestopuhc`: Forces the flag `started` in the data.json file to `true`, which the pre-made overlay will detect and stop showing the overlay.
+* `/resetpresenter`: Resets certain data in the presenter. As of now, only the deaths are reset.
+* `/forcestartuhc`: Forces the flag `started` in the data.json file to `true`, which the pre-made overlay will detect and start showing the overlay.
+* `/forcestopuhc`: Forces the flag `started` in the data.json file to `true`, which the pre-made overlay will detect and stop showing the overlay.
 
 # Contributing
 
