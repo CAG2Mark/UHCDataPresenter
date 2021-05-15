@@ -1,7 +1,7 @@
 # UHCDataPresenter
 Pipe locally retrieved data from CK to localhost server.
 
-Special thanks to https://github.com/RubenNL/ (RubenNL) for doing most of the heavy lifting with Fabric to make this possible and https://github.com/DownloadPizza (DownloadPizza) for providing assistance with Fabric.
+Special thanks to https://github.com/RubenNL/ (RubenNL) for doing most of the heavy lifting with Fabric to make this possible (he did around 90% of the mod itself) and https://github.com/DownloadPizza (DownloadPizza) for providing assistance with Fabric.
  
 # Using
 **IMPORTANT**: Requires Fabric loader 0.11.3 or above, and version 0.34.2 of the Fabric API or above.
