@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overlay</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="death-box-template" class="death-box">
+        <div class="death-box-time-pill">
+            <p class="death-box-time"></p>
+        </div>
+        <div class="death-box-data-container">
+            <span class="death-box-player-team">⬤</span>
+            <span class="death-box-player"></span>
+            <span>&lt;--</span>
+            <span class="death-box-attacker-team">⬤</span>
+            <span class="death-box-attacker"></span>
+        </div>
+    </div>
+
+    <div id="player-box-template" class="player-box">
+        <div class="player-box-border"></div>
+        <div class="player-box-bar-top"></div>
+        <div class="player-box-bar-bottom"></div>
+        <div class="player-box-data">
+            <span class="player-box-player"></span>
+            <span>-</span>
+            <span class="player-box-health"></span>
+        </div>
+    </div>
+</body>
+
+<script src="jquery-3.6.0.min.js"></script>
+<script src="script.js"></script>
+</html>

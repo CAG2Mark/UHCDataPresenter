@@ -11,10 +11,16 @@ public class PlayerInfo {
 	public int health;
 	public PlayerInfo(PlayerListEntry player) {
 		name=player.getProfile().getName();
-		if(player.getScoreboardTeam()!=null && player.getScoreboardTeam().getColor() != null && player.getScoreboardTeam().getColor().getColorValue() != null) {
-			teamColor = "#" + StringUtils.leftPad(
-					Integer.toHexString(player.getScoreboardTeam().getColor().getColorValue()),
-					6, '0');
+		try {
+			if (player.getScoreboardTeam() != null && player.getScoreboardTeam().getColor() != null && player.getScoreboardTeam().getColor().getColorValue() != null) {
+				teamColor = "#" + StringUtils.leftPad(
+						Integer.toHexString(player.getScoreboardTeam().getColor().getColorValue()),
+						6, '0');
+			}
+		}
+		catch (NullPointerException e) {
+			// mojang bad
+			teamColor = "#ffffff";
 		}
 		if(MinecraftClient.getInstance().world==null) {
 			System.out.println("NO WORLD LOADED???");

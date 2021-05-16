@@ -310,7 +310,7 @@ const playersWidth = 220;
 
 const playersHeight = 36;
 
-var deathContainer = new DataContainer(3, deathsWidth, 108, 36, true, {bottom:14, left:16});
+var deathContainer = new DataContainer(3, deathsWidth, 108, 36, false, {top:14, right:16});
 
 const leftPadding = 0;
 
@@ -441,5 +441,5 @@ function addItem(text) {
     d.style.height = "100%";
     d.style.backgroundColor = "#ff0000";
     d.innerHTML = text;
-    deathContainer.addItem(d);
+    playersContainer.addItem(d);
 }
