@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.MessageType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
@@ -23,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DataAPI {
 
@@ -30,6 +34,7 @@ public class DataAPI {
 
 	private boolean isInitialized;
 	Response response=new Response();
+	public static String playerName;
 	public void addDeath(Death death) {
 		response.deaths.add(death);
 	}
@@ -52,6 +57,25 @@ public class DataAPI {
 
 	}
 
+	public void update() {
+		ClientPlayerEntity thisPlayer=MinecraftClient.getInstance().player;
+		if(thisPlayer==null) return;
+		playerName = thisPlayer.getName().asString();
+
+		// init stream
+		Supplier<Stream<PlayerInfo>> playerStream = () -> thisPlayer.networkHandler.getPlayerList().stream()
+				.filter(player->player.getDisplayName()==null)//remove BTLP2ebb60ef
+				.map(PlayerInfo::new);
+
+		// intermediary step to get the info of the current player
+		PlayerInfo cur = playerStream.get().filter(p -> p.name.equals(playerName)).findFirst().orElse(null);
+
+		if (cur != null) {
+			response.curPlayer=cur;
+		}
+
+		response.players=playerStream.get().collect(Collectors.toList());
+	}
 
 	public void initialize() throws IOException {
 		if (isInitialized) return;
@@ -77,7 +101,7 @@ public class DataAPI {
 				exchange.sendResponseHeaders(204, -1);
 				return;
 			}
-
+			update();
 
 			OutputStream outputStream = exchange.getResponseBody();
 			Gson gson = new Gson();
