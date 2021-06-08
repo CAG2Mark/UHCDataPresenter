@@ -17,13 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ReceiveMessageMixin {
 	@Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("TAIL"))
 	public void addMessage(Text text, int messageId, CallbackInfo info) {
-		System.out.println(text);
 		if(text instanceof TranslatableText) {
 			TranslatableText translatableText=(TranslatableText) text;
 			if(!translatableText.getKey().contains("death")) return;
 			Death death=new Death(translatableText);
 			UHCDataPresenter.api.addDeath(death);
-			System.out.println("Added death: "+death);
 		}
 
 		String msg = text.asString().trim();
