@@ -24,7 +24,8 @@ public class ReceiveMessageMixin {
 			UHCDataPresenter.api.addDeath(death);
 		}
 
-		String msg = text.asString().trim();
+		String msg = text.getSiblings().get(0).asString();
+
 		// check if UHC started
 		if (msg.startsWith("All your chat messages now appear in team chat.")) {
 			UHCDataPresenter.api.setStarted(true);

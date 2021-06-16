@@ -289,7 +289,7 @@ function generateDeathContainer(player, attacker, key, time) {
         templ.getElementsByClassName("death-box-player-team")[0].style.color = players[player].color;
     }
 
-    if (key.includes(".player") && players[attacker]) {
+    if (players[attacker]) {
         let attackerDot = templ.getElementsByClassName("death-box-attacker-team")[0];
         attackerDot.style.color = players[attacker].color;
         attackerDot.style.display = "inline";
