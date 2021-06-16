@@ -15,9 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Mixin(ChatHud.class)
+@Mixin(value = ChatHud.class, priority = 1100) //high priority, because advancedChat overwrites it: https://github.com/DarkKronicle/AdvancedChat/blob/v3/src/main/java/io/github/darkkronicle/advancedchat/mixin/MixinChatHud.java
 public class ReceiveMessageMixin {
-	@Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("TAIL"))
+	@Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("HEAD"))
 	public void addMessage(Text text, int messageId, CallbackInfo info) {
 		if(text instanceof TranslatableText) {
 			TranslatableText translatableText=(TranslatableText) text;
