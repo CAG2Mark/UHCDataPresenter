@@ -1,6 +1,6 @@
 html, body {
     background-color: transparent;
-    font: 13px Inter, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif
+    font: 13px Inter, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
 }
 
 body > * {
@@ -29,7 +29,7 @@ body > * {
     width: 270px;
     height: 32px;
     border-radius: 4px;
-    background-color: rgba(183, 25, 25, 0.7);
+    background-color: rgba(183, 25, 25, 0.8);
 
     margin: 2px 0px;
 
@@ -98,7 +98,7 @@ body > * {
 
     position: relative;
 
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .player-box-bar-top, .player-box-bar-bottom {
@@ -111,7 +111,7 @@ body > * {
     position: absolute;
     width: calc(100% - 4px);
     height: calc(100% - 4px);
-    border-radius: 6px !important; 
+    border-radius: 4px !important; 
     border-width: 2px;
     border-style: solid;
     border-color: white;

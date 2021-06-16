@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
+
 @Mixin(ChatHud.class)
 public class ReceiveMessageMixin {
 	@Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("TAIL"))
@@ -24,7 +26,14 @@ public class ReceiveMessageMixin {
 			UHCDataPresenter.api.addDeath(death);
 		}
 
-		String msg = text.getSiblings().get(0).asString();
+		List<Text> siblings = text.getSiblings();
+		String msg;
+		if (siblings.isEmpty()) {
+			msg = text.asString();
+		}
+		else {
+			msg = text.getSiblings().get(0).asString();
+		}
 
 		// check if UHC started
 		if (msg.startsWith("All your chat messages now appear in team chat.")) {
