@@ -243,7 +243,9 @@ function parseData(data) {
         }
 
         let healthDiff = p.setHealth(player.health);
-        p.setColor(player.teamColor);
+        if (player.teamColor != "#ffffff") {
+            p.setColor(player.teamColor);
+        }
 
         // only add players that are in the current player's team
         if (p.color == currentPlayer.teamColor && p.color != "#ffffff") {
