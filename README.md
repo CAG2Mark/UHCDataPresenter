@@ -6,7 +6,7 @@ Special thanks to https://github.com/RubenNL/ (RubenNL) for doing most of the he
 # Using
 **IMPORTANT**: Requires Fabric loader 0.11.3 or above, and version 0.34.2 of the Fabric API or above.
  
-Simply put into your mods folder and run. The data server will be run on `localhost` on port `8081`, so please make sure that port is free. At the moment, this is not configurable.
+Simply put into your mods folder and run. The data server will be run on `localhost` on port `8081`, so please make sure that port is free. At the moment, this is not configurable without rebuilding the mod itself and changing the overlay code.
  
 To use the pre-made overlay, add a Browser Source in OBS and link it to EITHER `overlay1/index.html` or `overlay2/index.html` in the overlay zip file (or `overlay` folder if you cloned the repo). Set the size to 1920x1080.
 
