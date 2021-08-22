@@ -30,6 +30,7 @@ git clone https://github.com/CAG2Mark/UHCDataPresenter
 cd UHCDataPresenter
 ./gradlew
 ````
+If you are using IntelliJ IDEA, then you should open build.gradle to open the project file. IntellIJ will then sync everything for you; no need to run `./gradlew`.
 
 To build:
 ```bash
