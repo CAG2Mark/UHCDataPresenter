@@ -151,7 +151,10 @@ const deathCauses = {
     "death.attack.fireworks": "Fireworks",
     "death.attack.badRespawnPoint.message": "Being Dumb",
     "death.attack.sweetBerryBush": "Sweet Berry Bush",
-    "death.attack.sting": "Bees"
+    "death.attack.sting": "Bees",
+    "death.attack.stalagmite": "Stalagmite",
+    "death.attack.fallingStalactite": "Stalactite",
+    "death.attack.freeze": "Freezing"
 };
 
 const deathTemplate = document.getElementById("death-box-template");
