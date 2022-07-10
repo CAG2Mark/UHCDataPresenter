@@ -1,27 +1,16 @@
 package me.markng.uhcdatapresenter;
 
 import com.google.gson.Gson;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.network.MessageType;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
+import net.minecraft.text.Text;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Supplier;
@@ -49,7 +38,7 @@ public class DataAPI {
 			MinecraftClient mc = MinecraftClient.getInstance();
 
 			if (mc.player == null) return;
-			mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("[UHCDataPresenter] Set started flag to true."), mc.player.getUuid());
+			mc.inGameHud.getChatHud().addMessage(Text.literal("[UHCDataPresenter] Set started flag to true."));
 		}
 	}
 
@@ -60,7 +49,7 @@ public class DataAPI {
 	public void update() {
 		ClientPlayerEntity thisPlayer=MinecraftClient.getInstance().player;
 		if(thisPlayer==null) return;
-		playerName = thisPlayer.getName().asString();
+		playerName = thisPlayer.getName().getString();
 
 		// init stream
 		Supplier<Stream<PlayerInfo>> playerStream = () -> thisPlayer.networkHandler.getPlayerList().stream()

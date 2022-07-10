@@ -3,11 +3,8 @@ package me.markng.uhcdatapresenter.mixin;
 import me.markng.uhcdatapresenter.Death;
 import me.markng.uhcdatapresenter.UHCDataPresenter;
 import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.resource.language.I18n;
-import net.minecraft.text.BaseText;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,20 +16,21 @@ import java.util.List;
 public class ReceiveMessageMixin {
 	@Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("TAIL"))
 	public void addMessage(Text text, int messageId, CallbackInfo info) {
-		if(text instanceof TranslatableText) {
-			TranslatableText translatableText=(TranslatableText) text;
-			if(!translatableText.getKey().contains("death")) return;
-			Death death=new Death(translatableText);
-			UHCDataPresenter.api.addDeath(death);
-		}
 
 		List<Text> siblings = text.getSiblings();
 		String msg;
 		if (siblings.isEmpty()) {
-			msg = text.asString();
+			msg = text.getString();
 		}
 		else {
-			msg = text.getSiblings().get(0).asString();
+			msg = text.getSiblings().get(0).getString();
+		}
+
+		if(text.getContent() instanceof TranslatableTextContent translatableText) {
+			if(!translatableText.getKey().contains("death")) return;
+			Death death=new Death(translatableText, msg);
+			UHCDataPresenter.api.addDeath(death);
+			return;
 		}
 
 		// check if UHC started

@@ -1,17 +1,16 @@
 package me.markng.uhcdatapresenter;
-import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.network.MessageType;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class UHCDataPresenter implements ModInitializer {
 
@@ -30,41 +29,45 @@ public class UHCDataPresenter implements ModInitializer {
         log(Level.INFO, "Initializing");
 
         // reset command
-        ClientCommandManager.DISPATCHER.register(literal("resetpresenter").executes(context -> {
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            dispatcher.register(
+                    literal("resetpresenter").executes(context -> {
             UHCDataPresenter.api.reset();
 
             // send message
             MinecraftClient mc = MinecraftClient.getInstance();
-            mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("Reset the UHC Data Presenter."), mc.player.getUuid());
+            mc.inGameHud.getChatHud().addMessage(Text.literal("Reset the UHC Data Presenter."));
 
             return 1;
-        }));
+        }));});
 
         // force send uhc stopped message
-        ClientCommandManager.DISPATCHER.register(literal("forcestopuhc").executes(context -> {
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            dispatcher.register(literal("forcestopuhc").executes(context -> {
             // send message
             MinecraftClient mc = MinecraftClient.getInstance();
             if (mc.player != null)
-                mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("Force stopped the UHC."), mc.player.getUuid());
+                mc.inGameHud.getChatHud().addMessage(Text.literal("Force stopped the UHC."));
 
             api.setStarted(false);
 
             return 1;
-        }));
+        }));});
 
         // force send uhc started message
-        ClientCommandManager.DISPATCHER.register(literal("forcestartuhc").executes(context -> {
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            dispatcher.register(literal("forcestartuhc").executes(context -> {
             UHCDataPresenter.api.reset();
 
             // send message
             MinecraftClient mc = MinecraftClient.getInstance();
             if (mc.player != null)
-                mc.inGameHud.addChatMessage(MessageType.SYSTEM, new LiteralText("Force started the UHC."), mc.player.getUuid());
+                mc.inGameHud.getChatHud().addMessage(Text.literal("Force started the UHC."));
 
             api.setStarted(true);
 
             return 1;
-        }));
+        }));});
 
         try {
             api.initialize();
