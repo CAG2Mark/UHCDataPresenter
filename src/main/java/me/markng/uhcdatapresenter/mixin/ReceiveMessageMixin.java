@@ -16,12 +16,6 @@ import java.util.List;
 public class ReceiveMessageMixin {
 	@Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("TAIL"))
 	public void addMessage(Text text, int messageId, CallbackInfo info) {
-		if(text instanceof TranslatableTextContent) {
-			TranslatableTextContent translatableText=(TranslatableTextContent) text;
-			if(!translatableText.getKey().contains("death")) return;
-			Death death=new Death(translatableText);
-			UHCDataPresenter.api.addDeath(death);
-		}
 
 		List<Text> siblings = text.getSiblings();
 		String msg;
@@ -30,6 +24,13 @@ public class ReceiveMessageMixin {
 		}
 		else {
 			msg = text.getSiblings().get(0).getString();
+		}
+
+		if(text.getContent() instanceof TranslatableTextContent translatableText) {
+			if(!translatableText.getKey().contains("death")) return;
+			Death death=new Death(translatableText, msg);
+			UHCDataPresenter.api.addDeath(death);
+			return;
 		}
 
 		// check if UHC started
