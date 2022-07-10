@@ -154,7 +154,8 @@ const deathCauses = {
     "death.attack.sting": "Bees",
     "death.attack.stalagmite": "Stalagmite",
     "death.attack.fallingStalactite": "Stalactite",
-    "death.attack.freeze": "Freezing"
+    "death.attack.freeze": "Freezing",
+    "death.attack.sonic_boom": "Sonic Boom"
 };
 
 const deathTemplate = document.getElementById("death-box-template");
