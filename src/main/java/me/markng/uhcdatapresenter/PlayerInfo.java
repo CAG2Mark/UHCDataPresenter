@@ -23,7 +23,6 @@ public class PlayerInfo {
 			teamColor = "#ffffff";
 		}
 		if(MinecraftClient.getInstance().world==null) {
-			System.out.println("NO WORLD LOADED???");
 			return;
 		}
 
