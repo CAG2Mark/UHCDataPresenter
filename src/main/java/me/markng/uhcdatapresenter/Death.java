@@ -14,7 +14,6 @@ public class Death {
 	public String message;
 	public Long time;
 	public Death(TranslatableTextContent translatableText, String message) {
-		System.out.println("death received");
 		String killed= "";
 		String attacker = "";
 
