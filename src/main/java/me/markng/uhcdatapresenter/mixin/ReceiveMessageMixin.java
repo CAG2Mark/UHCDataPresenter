@@ -14,8 +14,8 @@ import java.util.List;
 
 @Mixin(ChatHud.class)
 public class ReceiveMessageMixin {
-	@Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("TAIL"))
-	public void addMessage(Text text, int messageId, CallbackInfo info) {
+	@Inject(method = "addMessage(Lnet/minecraft/text/Text;)V", at = @At("TAIL"))
+	public void addMessage(Text text, CallbackInfo info) {
 
 		List<Text> siblings = text.getSiblings();
 		String msg;
