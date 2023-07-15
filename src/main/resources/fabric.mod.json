@@ -17,16 +17,14 @@
   "entrypoints": {
     "main": [
       "me.markng.uhcdatapresenter.UHCDataPresenter"
-    ],
-    "client": [],
-    "server": []
+    ]
   },
   "mixins": [
     "uhc-data-presenter.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.19",
+    "fabricloader": "*",
     "fabric": "*",
-    "minecraft": "1.19.4"
+    "minecraft": "1.20.1"
   }
 }
