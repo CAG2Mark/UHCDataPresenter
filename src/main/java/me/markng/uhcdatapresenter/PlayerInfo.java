@@ -3,7 +3,6 @@ package me.markng.uhcdatapresenter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.scoreboard.ScoreboardDisplaySlot;
 
 import org.apache.commons.lang3.StringUtils;
