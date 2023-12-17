@@ -32,42 +32,45 @@ public class UHCDataPresenter implements ModInitializer {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             dispatcher.register(
                     literal("resetpresenter").executes(context -> {
-            UHCDataPresenter.api.reset();
+                        UHCDataPresenter.api.reset();
 
-            // send message
-            MinecraftClient mc = MinecraftClient.getInstance();
-            mc.inGameHud.getChatHud().addMessage(Text.literal("Reset the UHC Data Presenter."));
+                        // send message
+                        MinecraftClient mc = MinecraftClient.getInstance();
+                        mc.inGameHud.getChatHud().addMessage(Text.literal("Reset the UHC Data Presenter."));
 
-            return 1;
-        }));});
+                        return 1;
+                    }));
+        });
 
         // force send uhc stopped message
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             dispatcher.register(literal("forcestopuhc").executes(context -> {
-            // send message
-            MinecraftClient mc = MinecraftClient.getInstance();
-            if (mc.player != null)
-                mc.inGameHud.getChatHud().addMessage(Text.literal("Force stopped the UHC."));
+                // send message
+                MinecraftClient mc = MinecraftClient.getInstance();
+                if (mc.player != null)
+                    mc.inGameHud.getChatHud().addMessage(Text.literal("Force stopped the UHC."));
 
-            api.setStarted(false);
+                api.setStarted(false);
 
-            return 1;
-        }));});
+                return 1;
+            }));
+        });
 
         // force send uhc started message
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             dispatcher.register(literal("forcestartuhc").executes(context -> {
-            UHCDataPresenter.api.reset();
+                UHCDataPresenter.api.reset();
 
-            // send message
-            MinecraftClient mc = MinecraftClient.getInstance();
-            if (mc.player != null)
-                mc.inGameHud.getChatHud().addMessage(Text.literal("Force started the UHC."));
+                // send message
+                MinecraftClient mc = MinecraftClient.getInstance();
+                if (mc.player != null)
+                    mc.inGameHud.getChatHud().addMessage(Text.literal("Force started the UHC."));
 
-            api.setStarted(true);
+                api.setStarted(true);
 
-            return 1;
-        }));});
+                return 1;
+            }));
+        });
 
         try {
             api.initialize();
@@ -76,8 +79,8 @@ public class UHCDataPresenter implements ModInitializer {
         }
     }
 
-    public static void log(Level level, String message){
-        LOGGER.log(level, "["+MOD_NAME+"] " + message);
+    public static void log(Level level, String message) {
+        LOGGER.log(level, "[" + MOD_NAME + "] " + message);
     }
 
 }

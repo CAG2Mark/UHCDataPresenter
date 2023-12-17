@@ -21,14 +21,14 @@ public class ReceiveMessageMixin {
 		String msg;
 		if (siblings.isEmpty()) {
 			msg = text.getString();
-		}
-		else {
+		} else {
 			msg = text.getSiblings().get(0).getString();
 		}
 
-		if(text.getContent() instanceof TranslatableTextContent translatableText) {
-			if(!translatableText.getKey().contains("death")) return;
-			Death death=new Death(translatableText, msg);
+		if (text.getContent() instanceof TranslatableTextContent translatableText) {
+			if (!translatableText.getKey().contains("death"))
+				return;
+			Death death = new Death(translatableText, msg);
 			UHCDataPresenter.api.addDeath(death);
 			return;
 		}

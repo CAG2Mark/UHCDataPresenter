@@ -5,7 +5,6 @@ import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableTextContent;
-import org.spongepowered.asm.mixin.Mutable;
 
 public class Death {
 	public String attacker;

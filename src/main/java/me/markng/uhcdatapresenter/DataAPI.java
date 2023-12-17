@@ -22,8 +22,9 @@ public class DataAPI {
 	private HttpServer server;
 
 	private boolean isInitialized;
-	Response response=new Response();
+	Response response = new Response();
 	public static String playerName;
+
 	public void addDeath(Death death) {
 		response.deaths.add(death);
 	}
@@ -37,7 +38,8 @@ public class DataAPI {
 		if (started) {
 			MinecraftClient mc = MinecraftClient.getInstance();
 
-			if (mc.player == null) return;
+			if (mc.player == null)
+				return;
 			mc.inGameHud.getChatHud().addMessage(Text.literal("[UHCDataPresenter] Set started flag to true."));
 		}
 	}
@@ -47,33 +49,35 @@ public class DataAPI {
 	}
 
 	public void update() {
-		ClientPlayerEntity thisPlayer=MinecraftClient.getInstance().player;
-		if(thisPlayer==null) return;
+		MinecraftClient instance = MinecraftClient.getInstance();
+		ClientPlayerEntity thisPlayer = instance.player;
+		if (thisPlayer == null)
+			return;
 		playerName = thisPlayer.getName().getString();
 
 		// init stream
 		Supplier<Stream<PlayerInfo>> playerStream = () -> thisPlayer.networkHandler.getPlayerList().stream()
-				.filter(player->player.getDisplayName()==null)//remove BTLP2ebb60ef
+				.filter(player -> player.getDisplayName() == null)// remove BTLP2ebb60ef
 				.map(PlayerInfo::new);
 
 		// intermediary step to get the info of the current player
 		PlayerInfo cur = playerStream.get().filter(p -> p.name.equals(playerName)).findFirst().orElse(null);
 
 		if (cur != null) {
-			response.curPlayer=cur;
+			response.curPlayer = cur;
 		}
 
-		response.players=playerStream.get().collect(Collectors.toList());
+		response.players = playerStream.get().collect(Collectors.toList());
 	}
 
 	public void initialize() throws IOException {
-		if (isInitialized) return;
+		if (isInitialized)
+			return;
 
 		try {
 			server = HttpServer.create(
 					new InetSocketAddress("localhost", 8081),
-					0
-			);
+					0);
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw e;
@@ -94,7 +98,7 @@ public class DataAPI {
 
 			OutputStream outputStream = exchange.getResponseBody();
 			Gson gson = new Gson();
-			String res=gson.toJson(response);
+			String res = gson.toJson(response);
 
 			byte[] bytes = res.getBytes();
 
@@ -104,8 +108,7 @@ public class DataAPI {
 				outputStream.write(bytes);
 				outputStream.flush();
 				outputStream.close();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
@@ -118,7 +121,6 @@ public class DataAPI {
 		isInitialized = true;
 	}
 
-
 	private static String encodeMessage(String message) {
 		try {
 			return URLEncoder.encode(message, "UTF-8")
@@ -128,14 +130,16 @@ public class DataAPI {
 					.replaceAll("\\%28", "(")
 					.replaceAll("\\%29", ")")
 					.replaceAll("\\%7E", "~");
-		} catch(UnsupportedEncodingException e) {
+		} catch (UnsupportedEncodingException e) {
 			return "ERROR PARSING";
 		}
 	}
+
 	public static void sendMessage(String message) {
 
 	}
+
 	public static void sendLog(String message) {
-		DataAPI.sendMessage("{\"log\":\""+encodeMessage(message)+"\"}");
+		DataAPI.sendMessage("{\"log\":\"" + encodeMessage(message) + "\"}");
 	}
 }
