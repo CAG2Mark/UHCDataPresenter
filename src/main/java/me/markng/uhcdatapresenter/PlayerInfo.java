@@ -3,6 +3,7 @@ package me.markng.uhcdatapresenter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.scoreboard.ScoreboardDisplaySlot;
 import org.apache.commons.lang3.StringUtils;
 
 public class PlayerInfo {
@@ -27,6 +28,6 @@ public class PlayerInfo {
 		}
 
 		Scoreboard scoreboard= MinecraftClient.getInstance().world.getScoreboard();
-		health=scoreboard.getPlayerScore(name,scoreboard.getObjectiveForSlot(0)).getScore();
+		health=scoreboard.getPlayerScore(name,scoreboard.getObjectiveForSlot(ScoreboardDisplaySlot.LIST)).getScore();
 	}
 }

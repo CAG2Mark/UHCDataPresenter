@@ -5,10 +5,5 @@
   "mixins": [
     "HeaderFooter",
     "ReceiveMessageMixin"
-  ],
-  "client": [],
-  "server": [],
-  "injectors": {
-    "defaultRequire": 1
-  }
+  ]
 }

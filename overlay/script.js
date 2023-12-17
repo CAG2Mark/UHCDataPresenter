@@ -121,13 +121,6 @@ class PlayerBox {
 //#endregion
 
 const deathCauses = {
-    "death.fell.accident.ladder": "Falling off Ladder",
-    "death.fell.accident.vines": "Falling off Vines",
-    "death.fell.accident.weeping_vines": "Falling off Vines",
-    "death.fell.accident.twisting_vines": "Falling off Vines",
-    "death.fell.accident.scaffolding": "Falling off Scaffolding",
-    "death.fell.accident.other_climbable": "Falling off while Climbing",
-    "death.fell.accident.generic": "Fall Damage",
     "death.attack.lightningBolt": "Lightning",
     "death.attack.inFire": "Fire",
     "death.attack.onFire": "Fire",
@@ -136,6 +129,8 @@ const deathCauses = {
     "death.attack.inWall": "Suffocation",
     "death.attack.cramming": "Cramming",
     "death.attack.drown": "Drowning",
+    "death.attack.dryout": "Dehydration",
+    "death.attack.even_more_magic": "Even More Magic",
     "death.attack.starve": "Starvation",
     "death.attack.cactus": "Cactus",
     "death.attack.generic": "Generic Death",
@@ -146,6 +141,7 @@ const deathCauses = {
     "death.attack.fallingBlock": "Falling Block",
     "death.attack.fall": "Fall Damage",
     "death.attack.outOfWorld": "Void",
+    "death.attack.outsideBorder": "Border",
     "death.attack.dragonBreath": "Dragon Breath",
     "death.attack.flyIntoWall": "Kinetic Energy",
     "death.attack.fireworks": "Fireworks",
@@ -155,7 +151,15 @@ const deathCauses = {
     "death.attack.stalagmite": "Stalagmite",
     "death.attack.fallingStalactite": "Stalactite",
     "death.attack.freeze": "Freezing",
-    "death.attack.sonic_boom": "Sonic Boom"
+    "death.attack.sonic_boom": "Sonic Boom",
+    "death.fell.accident.ladder": "Falling off Ladder",
+    "death.fell.accident.vines": "Falling off Vines",
+    "death.fell.accident.weeping_vines": "Falling off Vines",
+    "death.fell.accident.twisting_vines": "Falling off Vines",
+    "death.fell.accident.scaffolding": "Falling off Scaffolding",
+    "death.fell.accident.other_climbable": "Falling off while Climbing",
+    "death.fell.accident.generic": "Fall Damage",
+    "death.fell.killer": "Fall Damage",
 };
 
 const deathTemplate = document.getElementById("death-box-template");
