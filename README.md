@@ -10,7 +10,7 @@ Simply put into your mods folder and run. The data server will be run on `localh
  
 To use the pre-made overlay, add a Browser Source in OBS and link it to EITHER `overlay1/index.html` or `overlay2/index.html` in the overlay zip file (or `overlay` folder if you cloned the repo). Set the size to 1920x1080.
 
-`overlay1` and `overlay2` fucntion exactly the same. The two overlays just have different sizes and layouts.
+`overlay1` and `overlay2` function exactly the same. The two overlays just have different sizes and layouts.
 
 The mod will detect when the message `All your chat messages now appear in team chat.` appears in-game, which is what the CK UHC plugin displays when the game starts. It will then send the flag `started: true` to the overlay via. the data.json file, which tells the overlay to start receiving and displaying data. If this does not happen, please run `/forcestartuhc` in-game.
 
