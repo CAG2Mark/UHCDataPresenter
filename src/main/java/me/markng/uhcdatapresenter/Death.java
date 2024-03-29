@@ -2,7 +2,7 @@ package me.markng.uhcdatapresenter;
 
 import net.minecraft.client.resource.language.I18n;
 
-import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.TextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableTextContent;
 
@@ -20,18 +20,17 @@ public class Death {
 
 		if (killedPart instanceof TranslatableTextContent killedText)
 			killed = I18n.translate((killedText).getKey());
-		else if (killedPart instanceof LiteralTextContent killedText)
-			killed = killedText.string();
+		else if (killedPart instanceof TextContent killedText)
+			killed = killedText.toString();
 		else if (killedPart instanceof MutableText killedText)
 			killed = killedText.getString();
 
 		if (translatableText.getArgs().length > 1) {
 			Object attackerPart = translatableText.getArgs()[1];
-
 			if (attackerPart instanceof TranslatableTextContent attackerText)
 				attacker = I18n.translate(attackerText.getKey());
-			else if (attackerPart instanceof LiteralTextContent attackerText)
-				attacker = attackerText.string();
+			else if (attackerPart instanceof TextContent attackerText)
+				attacker = attackerText.toString();
 			else if (attackerPart instanceof MutableText attackerText)
 				attacker = attackerText.getString();
 		} else {
